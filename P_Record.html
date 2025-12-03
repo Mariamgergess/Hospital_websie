@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Record</title>
+<style>
+    h1{
+        text-align: center;
+        margin: 20px 0px;
+        padding: 20px;
+        background-color: rgba(169, 179, 188, 0.92);
+    }
+    #add{
+        display: inline-block;
+        padding: 8px 20px;
+        background-color: rgb(64, 167, 235);
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    #remove{
+        display: inline-block;
+        padding: 8px 20px;
+        background-color: rgb(228, 15, 15);
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .opt{
+        padding: 8px 20px;
+        font-size: 18px;
+        border-radius: 8px;
+        background-color: rgba(210, 204, 204, 0.782);
+        margin-right: 10px;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+    }
+    th, td{
+        border: 1px solid #999;
+        padding: 10px;
+        text-align: center;
+    }
+    th{
+        background-color: rgba(169, 179, 188, 0.92);
+    }
+    .controls { text-align:center; margin-bottom:10px }
+    .search-area{ text-align:center; margin-top:10px }
+    .small{ padding:8px 10px; border-radius:6px; font-size:16px }
+</style>
+</head>
+<body>
+
+<h1>Patient Records</h1>
+
+<div style="text-align:center;" class="controls">
+    <!-- ADDED: Patient ID and Name (minimal addition) -->
+    <input id="patientId" class="opt" placeholder="Patient ID" style="width:140px">
+    <input id="patientName" class="opt" placeholder="Patient Name" style="width:180px">
+
+    <select class="opt" id="type">
+       <option value="">Lab Tests</option> 
+       <option value="Radiology">Radiology</option>
+       <option value="Follow_Up">Follow Up</option>
+       <option value="Prescription">Prescription</option>
+       <option value="Check_Up">Check Up</option>
+    </select>
+
+    <select class="opt" id="doctor">
+        <option value="">Doctor</option>
+        <option value="Ahmed Mohamed">Ahmed Mohamed</option>
+        <option value="Sara Samy">Sara Samy</option>
+        <option value="Alsaeed Khedr">Alsaeed Khedr</option>
+        <option value="Amr Hisham">Amr Hisham</option>
+        <option value="Islam Mohamed">Islam Mohamed</option>
+    </select>
+
+    <select class="opt" id="speciality">
+        <option value="">Speciality</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Neurology">Neurology</option>
+        <option value="Pediatrics">Pediatrics</option>
+        <option value="Orthopedics">Orthopedics</option>
+    </select>
+
+    <input type="date" id="date" class="opt">
+    <button id="add" type="button" onclick="addRecord()">Add Record</button>
+    <button id="remove" type="button" onclick="removeLast()">Remove Last</button>
+</div>
+
+<!-- Search area -->
+<div class="search-area">
+  <input id="searchId" class="small" placeholder="Search by Patient ID">
+  <button class="small" onclick="searchById()">Search</button>
+  <button class="small" onclick="renderTable()">Show All</button>
+  <span style="margin-left:10px">Results: <span id="count">0</span></span>
+</div>
+
+<!-- جدول عرض السجلات -->
+<table id="recordsTable">
+    <thead>
+        <tr>
+            <th>Patient ID</th>
+            <th>Patient Name</th>
+            <th>Type</th>
+            <th>Doctor</th>
+            <th>Speciality</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- السجلات الجديدة هتظهر هنا -->
+    </tbody>
+</table>
+
+<script>
+/* Minimal additions around your original addRecord logic:
+   - Added patientId & patientName fields
+   - Store records in localStorage so search works and data persists
+   - Remove last function
+   - Search by ID to show matching records
+*/
+
+const STORAGE_KEY = 'patient_records_v1';
+
+function loadRecords(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch(e){ return []; }
+}
+function saveRecords(arr){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+}
+
+function addRecord(){
+    // original fields + new id/name
+    const patientId = document.getElementById("patientId").value.trim();
+    const patientName = document.getElementById("patientName").value.trim();
+    const type = document.getElementById("type").value;
+    const doctor = document.getElementById("doctor").value;
+    const speciality = document.getElementById("speciality").value;
+    const date = document.getElementById("date").value;
+
+    // validation (same message as original)
+    if(!type || !doctor || !speciality || !date || !patientId || !patientName){
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // push to storage (preserve order)
+    const records = loadRecords();
+    records.push({ patientId, patientName, type, doctor, speciality, date });
+    saveRecords(records);
+
+    // re-render table (show all by default)
+    renderTable();
+
+    // Reset inputs (kept same fields plus new ones)
+    document.getElementById("patientId").value = "";
+    document.getElementById("patientName").value = "";
+    document.getElementById("type").value = "";
+    document.getElementById("doctor").value = "";
+    document.getElementById("speciality").value = "";
+    document.getElementById("date").value = "";
+}
+
+function removeLast(){
+    const records = loadRecords();
+    if(records.length === 0){
+        alert("No records to remove!");
+        return;
+    }
+    if(!confirm('Remove last record?')) return;
+    records.pop();
+    saveRecords(records);
+    renderTable();
+}
+
+function renderTable(filterId = ""){
+    const tableBody = document.getElementById("recordsTable").querySelector("tbody");
+    tableBody.innerHTML = "";
+    const records = loadRecords();
+    let shown = 0;
+    records.forEach((r)=>{
+        if(filterId && String(r.patientId) !== String(filterId)) return;
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${escapeHTML(r.patientId)}</td>
+                         <td>${escapeHTML(r.patientName)}</td>
+                         <td>${escapeHTML(r.type)}</td>
+                         <td>${escapeHTML(r.doctor)}</td>
+                         <td>${escapeHTML(r.speciality)}</td>
+                         <td>${escapeHTML(r.date)}</td>
+                         <td><button onclick="deleteRow(${shown})">Delete</button></td>`;
+        tableBody.appendChild(row);
+        shown++;
+    });
+    document.getElementById('count').textContent = shown;
+}
+
+// delete uses index of currently rendered rows — safer to re-render after deletion
+function deleteRow(renderIndex){
+    // find the uid in the currently shown list by mapping
+    const filterId = document.getElementById('searchId').value.trim();
+    const records = loadRecords();
+    // build list of indices that match filter (same order as render)
+    const visibleIndices = [];
+    records.forEach((r, i)=>{
+        if(filterId && String(r.patientId) !== String(filterId)) return;
+        visibleIndices.push(i);
+    });
+    const realIndex = visibleIndices[renderIndex];
+    if(realIndex === undefined) return alert('Record not found');
+    if(!confirm('Delete this record?')) return;
+    records.splice(realIndex,1);
+    saveRecords(records);
+    renderTable(filterId);
+}
+
+function searchById(){
+    const id = document.getElementById('searchId').value.trim();
+    renderTable(id);
+}
+
+// helper
+function escapeHTML(s){
+    if(s === null || s === undefined) return '';
+    return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// initial render
+renderTable();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-style: italic;
+            background: linear-gradient(rgba(107, 130, 167, 0.4), rgba(227, 218, 218, 0.4)),
+                url('https://images.healtheg.com//Images/53557/64831796_467508550674342_1583264991304220672_n90ecb7e2-e18f-44ec-b98e-47153ad23ecc.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: white(186, 12, 12);
+            padding-top: -50px;
+            background-origin: padding-box;
+        }
+
+        .page-container {
+            width: 70%;
+            max-width: 900px;
+            margin: 180px;
+             margin-top: 120px; /* عشان ينزل المحتوى تحت الشريط */
+        }
+
+        .welcome-container {
+            text-align: center;
+            background: rgba(215, 232, 235, 0.55);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(17, 16, 16, 0.899);
+            margin-bottom: 40px;
+            margin: 40px;
+        }
+
+        h1 {
+            color: black;
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: black;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: rgb(64, 167, 235);
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: rgb(64, 167, 235);
+        }
+        
+        .container{
+            display: flex;
+        }
+        .ABOUT{
+            padding: 10px 30px;
+    
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            margin: 20px 0px;
+            padding: 40px;
+            background-color: rgba(169, 179, 188, 0.92);
+        }
+
+        .bar a {
+
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: x-large;
+            justify-content: center;  /* النصوص في المنتصف */
+            gap: 80px;                /* ← المسافة بين الكلمات */
+            padding: 20px;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="bar">
+            <a href="sandw.HTML">Home</a>
+            <a href="login.html">Login</a>
+            <a href="search.html">search</a>
+            <a href="booking.html">Booking</a>
+        </div>
+    </header>
+
+     <div class="page-container">
+
+
+
+        <!-- Welcome Section -->
+        <div class="welcome-container" style="color: black;">
+            <h1 style="font-size: 48px; margin-bottom: 10px;">Welcome to SmartCare Hospital</h1>
+            <p style="font-size: 20px; margin-bottom: 30px;">Your health is our priority. Book appointments easily and find the right doctor for your needs.</p>
+            <a href="#search" class="btn">Get Started</a>
+
+        </div>
+     <div class="container">
+        <div class="ABOUT">
+            <h2  style="text-decoration: underline;">ABOUT US</h2>
+            <P>We are a team dedicated to improving the patient<br> experience by providing a smart, fast, 
+                and reliable<br> online appointment management system. <br> Our platform helps patients easily book and
+                 manage <br>their appointments while giving doctors powerful tools to <br>organize 
+                 schedules and access medical records efficiently.</P>
+        </div>
+        
+        <div class="ABOUT">
+            <h3  style="text-decoration: underline;">Contact Us</h3>
+        
+        <p><img src="https://img.icons8.com/ios-glyphs/30/000000/phone.png">
+           +20 111 222 3333</p>
+
+        <p><img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png">
+           hospital@gmail.com</p>
+
+        <h3 style="text-decoration: underline;">Follow Us</h3>
+    <div class="ABOUT">
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/40/000000/facebook.png"></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/40/000000/instagram-new.png"></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/40/000000/twitter--v1.png"></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/40/000000/youtube-play.png"></a>
+    </div>   
+  
+        </div>
+     </div>    
+    </div>
+</body>
+</html>

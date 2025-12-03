@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Search Page</title>
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-style: italic;
+            background: linear-gradient(rgba(107, 130, 167, 0.4), rgba(227, 218, 218, 0.4)),
+                url(gettyimages-173799627-612x612.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: white(186, 12, 12);
+            padding-top: -50px;
+            background-origin: padding-box;
+        }
+
+        fieldset {
+            background: rgba(215, 232, 235, 0.55);
+            color: black;
+            padding: 20px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 0 20px rgba(17, 16, 16, 0.899);
+        }
+
+        #search{
+            margin-top: 150px;
+            width: 80%;
+            
+        }
+
+        .search-item {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .doc{
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            background-color: rgba(210, 204, 204, 0.782);
+            margin: 6px 6px 6px 0;
+        }
+
+        select, input[type="checkbox"] {
+            margin: 5px;
+        }
+
+        input[type="button"] {
+            margin-top: 15px;
+            padding: 10px 25px;
+            font-size: 18px;
+            background-color: rgb(64, 167, 235);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background-color: rgb(33, 121, 177);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <!-- Search Section -->
+        <form id="search" method="post">
+            <fieldset>
+
+                <div class="search-item">
+                    <label style="color: black;">Doctor Name</label>
+                    <select class="doc">
+                        <option value="">Select Doctor</option>
+                        <option>Ahmed Mohamed</option>
+                        <option>Sara Samy</option>
+                        <option>Alsaeed Khedr</option>
+                        <option>Amr Hisham</option>
+                        <option>Islam Mohamed</option>
+                    </select>
+                </div>
+
+                <div class="search-item">
+                    <label style="color: black;">Speciality</label>
+                    <select class="doc">
+                        <option value="">Select Speciality</option>
+                        <option>Cardiology</option>
+                        <option>Dermatology</option>
+                        <option>Neurology</option>
+                        <option>Pediatrics</option>
+                        <option>Orthopedics</option>
+                    </select>
+                </div>
+
+                <p style="color:  black;; text-decoration-line: underline;">Degree:</p>
+                <div style="color: black;">
+                <input type="checkbox" name="degree" value="Specialist" > Specialist<br>
+                <input type="checkbox" name="degree" value="Professor" > Professor<br>
+                <input type="checkbox" name="degree" value="Expert" > Expert Professor<br>
+                <input type="checkbox" name="degree" value="Consultant" > Consultant<br>
+                </div>
+
+                <p style="color:  black;; text-decoration-line: underline; margin-top: 10px;">Available Appointments:</p>
+                <div style="color: black;" >
+                <input type="checkbox" name="day" value="today"> Today<br>
+                <input type="checkbox" name="day" value="tomorrow"> Tomorrow<br>
+                <input type="checkbox" name="day" value="any"> Any Time<br>
+                </div>
+
+                <input type="button" value="Search">
+            </fieldset>
+        </form>
+
+    </div>
+    
+</body>
+</html>
